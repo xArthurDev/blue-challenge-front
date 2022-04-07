@@ -1,0 +1,202 @@
+.back-button-padding {
+  padding: 1rem;
+}
+
+.main-background {
+  background: #f2f2f2;
+}
+
+.main-padding {
+  padding: 0rem 1.5rem 0rem 1.5rem;
+}
+
+.main-financial-card {
+  max-width: 90rem;
+  width: 90rem;
+  background: #003b4d;
+  color: #fff;
+}
+
+.main-financial-card-title {
+  padding-bottom: 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.05rem;
+}
+
+.main-letter-spacing {
+  letter-spacing: 0.05rem;
+}
+
+.main-divider {
+  position: relative !important;
+}
+
+.first-divider {
+  background: #fff;
+}
+
+.main-financial-card-content {
+  padding-top: 1rem;
+}
+
+.tile-text {
+  position: absolute;
+  left: 5px;
+}
+
+.subcard-color {
+  background: #fff;
+  box-shadow: none;
+  color: #1c5060;
+}
+
+.main-button {
+  background: #009775;
+  color: #fff;
+  box-shadow: none !important;
+}
+
+.dialog-actions {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.cancel-button {
+  background: #d6d6d6;
+  color: black;
+  margin-right: 1rem;
+}
+
+.action-list {
+  padding-bottom: 1rem;
+}
+
+.action-button {
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.float-right {
+  float: right;
+  position: relative;
+}
+
+.last-column-position {
+  position: absolute;
+  margin-top: 7rem;
+  right: 0;
+}
+
+.right-button {
+  position: absolute;
+  right: 0;
+}
+
+.col-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-4 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.row {
+  padding: 15px 0;
+  align-items: center;
+}
+
+.disabled-input {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.card-details-row {
+  color: black;
+}
+
+.card-details-column {
+  padding: 0.5rem;
+}
+
+.modal-header {
+  height: 3rem;
+  padding-top: 2rem;
+  background: #f9f9f9;
+  color: #1c5060;
+}
+
+.close-button {
+  margin-top: -1rem;
+}
+
+.custom-select {
+  background-image: linear-gradient(45deg, transparent 50%, rgb(92, 92, 92) 50%),
+    linear-gradient(135deg, rgb(92, 92, 92) 50%, transparent 50%),
+    linear-gradient(to right, transparent 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px), 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+.custom-select:focus {
+  background-image: linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, #1c5060, #1c5060);
+  background-position: calc(100% - 15px) 1em, calc(100% - 20px) 1em, 100% 0;
+  background-size: 5px 5px, 5px 5px, 2.5em 2.5em;
+  background-repeat: no-repeat;
+  outline: 0;
+}
+
+@media only screen and (max-width: 1100px) {
+  .custom-col {
+    flex: 0 0 33%;
+    max-width: 33%;
+  }
+}
+
+@media only screen and (max-width: 990px) {
+  .col-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .custom-col {
+    flex: 0 0 33%;
+    max-width: 33%;
+  }
+
+  .last-column-position {
+    position: relative;
+    margin-top: 0rem;
+  }
+}
+
+@media only screen and (max-width: 810px) {
+  .custom-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+@media only screen and (max-width: 585px) {
+  .custom-col {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 390px) {
+  .col-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .col-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}

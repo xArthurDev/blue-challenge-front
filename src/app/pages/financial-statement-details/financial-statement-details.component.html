@@ -1,0 +1,346 @@
+<ng-container
+  *ngIf="
+    currentFinancialStatementDetails$
+      | async as currentFinancialStatementDetails
+  "
+>
+  <div class="main-background">
+    <div class="back-button-padding">
+      <button
+        mat-raised-button
+        class="main-button"
+        (click)="goToListFinancialStatements()"
+      >
+        Voltar
+      </button>
+    </div>
+
+    <div class="main-padding">
+      <mat-grid-list cols="1" [rowHeight]="firstGridHeight">
+        <mat-grid-tile>
+          <mat-card class="main-financial-card">
+            <mat-card-title class="main-financial-card-title">
+              Atendimento <strong>Coop Hibrido</strong></mat-card-title
+            >
+            <mat-divider class="main-divider first-divider"></mat-divider>
+            <mat-card-content class="main-financial-card-content">
+              <div class="row">
+                <div
+                  class="col-4"
+                  *ngFor="
+                    let financialInformationPlaceholder of financialInformationPlaceholders
+                  "
+                >
+                  <div>
+                    <mat-label>
+                      <strong>{{
+                        financialInformationPlaceholder.text
+                      }}</strong>
+                    </mat-label>
+                  </div>
+                  <div>
+                    <mat-label
+                    >
+                      {{
+                        this.getFinancialInformationValue(
+                          financialInformationPlaceholder.referenceName
+                        )
+                      }}
+                    </mat-label>
+
+                  </div>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="1" rowHeight="5rem">
+        <mat-grid-tile>
+          <mat-card class="main-financial-card subcard-color">
+            <mat-card-title class="main-financial-card-title">
+              Detalhes de "Plástico"</mat-card-title
+            >
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="1" [rowHeight]="secondGridHeight">
+        <mat-grid-tile>
+          <mat-card class="main-financial-card subcard-color">
+            <mat-card-content class="main-financial-card-content">
+              <mat-card-content class="main-financial-card-content">
+                <div class="row card-details-row">
+                  <div
+                    *ngFor="let cardDetail of cardDetails; let i = index"
+                    [class]="
+                      i === cardDetails.length - 1
+                        ? 'col-4 card-details-column last-column-position'
+                        : 'col-4 card-details-column'
+                    "
+                  >
+                    <div>
+                      <mat-label>
+                        <strong>{{ cardDetail.text }}</strong>
+                      </mat-label>
+                    </div>
+                    <div>
+                      <mat-label *ngIf="cardDetail.text.includes('Data')">
+                        {{
+                          this.getFinancialInformationValue(
+                            cardDetail.referenceName
+                          ) | mask: 'd0/M0/0000 h0:m0'
+                        }}
+                      </mat-label>
+                      <mat-label *ngIf="!cardDetail.text.includes('Data')">
+                        {{
+                          this.getFinancialInformationValue(
+                            cardDetail.referenceName
+                          )
+                        }}
+                      </mat-label>
+                    </div>
+                  </div>
+                </div>
+              </mat-card-content>
+              <mat-grid-list cols="1" rows="1" rowHeight="3rem">
+                <mat-grid-tile colspan="1" rowspan="2" class="float-right">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="main-button right-button"
+                    (click)="openEditFinancialStatementDetailsModal(modalContent)"
+                  >
+                    Editar
+                  </button>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="1" [rowHeight]="thirdGridHeight">
+        <mat-grid-tile>
+          <mat-card class="main-financial-card subcard-color">
+            <mat-card-title class="main-financial-card-title">
+              Ações da tela</mat-card-title
+            >
+            <mat-divider class="main-divider"></mat-divider>
+            <div class="action-list"></div>
+            <div class="row card-details-row">
+              <div
+                class="col-4 custom-col card-details-column"
+                *ngFor="let actionButton of actionButtons"
+              >
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="main-button action-button"
+                  (click)="showActionButtonText(actionButton)"
+                >
+                  {{ actionButton.text }}
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+
+  <ng-template #modalContent let-modal>
+    <form [formGroup]="cardDetailsForm">
+      <div class="modal-header">
+        <h4 class="modal-title main-letter-spacing" id="modal-basic-title">
+          <strong> Editar detalhes de "Plástico" </strong>
+        </h4>
+        <button
+          type="button"
+          class="close close-button"
+          aria-label="Close"
+          (click)="modal.dismiss()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-padding">
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <label>Nome</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  placeholder="Nome"
+                  formControlName="name"
+                />
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+                <label>Cartão</label>
+              </div>
+              <div>
+                <input
+                  placement="top"
+                  ngbTooltip="Informação Não Editável"
+                  class="form-control disabled-input"
+                  mask="XXXX.XXXX.XXXX-0000"
+                  [hiddenInput]="true"
+                  placeholder="****.****.****.4545"
+                  readonly="true"
+                  formControlName="cardNumber"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div>
+                <label>Bloqueio do cartão</label>
+              </div>
+              <div>
+                <select
+                  class="form-control custom-select"
+                  matInput
+                  value="sel-opt1"
+                  formControlName="cardLock"
+                >
+                  <option value="">Selecione uma op...</option>
+                  <option [value]="true">Sim</option>
+                  <option [value]="false">Não</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Emissão</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  placeholder="00/00/0000"
+                  formControlName="cardEmission"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Sexo</label>
+              </div>
+              <div>
+                <select
+                  class="form-control custom-select"
+                  placeholder="Selecione uma op..."
+                  formControlName="gender"
+                  value="sel-opt2"
+                >
+                  <option value="">Selecione uma op...</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Feminino">Feminino</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Data de nascimento adicional</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  mask="d0/m0/0000"
+                  placeholder="00/00/0000"
+                  formControlName="cardEmission"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div>
+                <label>Altera senha CHIP</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  placeholder="******"
+                  formControlName="cardChipPassword"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Altera validação senha</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  placeholder="******"
+                  formControlName="cardPasswordValidation"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Exceção Aviso de Viagem</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  placeholder="-"
+                  formControlName="travelNoticeException"
+                />
+              </div>
+            </div>
+            <div class="col-4">
+              <div>
+                <label>Data/Hora</label>
+              </div>
+              <div>
+                <input
+                  class="form-control"
+                  mask="d0/M0/0000 h0:m0"
+                  placeholder="00/00/0000 00:00"
+                  formControlName="date"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-dialog-actions class="dialog-actions float-right">
+          <button
+            mat-raised-button
+            class="main-button cancel-button action-button"
+            (click)="modal.dismiss()"
+          >
+            Cancelar
+          </button>
+          <button
+            mat-raised-button
+            class="main-button action-button"
+            (click)="updateFinancialStatementDetails()"
+          >
+            Salvar Alterações
+          </button>
+        </mat-dialog-actions>
+      </div>
+    </form>
+  </ng-template>
+</ng-container>
+
+<!-- <div
+  *ngIf="
+  cardDetailsForm.controls['email'].errors
+      ?.['required'] &&
+      cardDetailsForm.controls['email'].touched
+  "
+  class="text text-danger mt-1"
+>
+  Email é obrigatório.
+</div> -->
