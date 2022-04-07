@@ -1,2 +1,15 @@
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "~ngx-toastr/toastr.css";
 /* You can add global styles to this file, and also import other style files */
+
+.toast-success {
+  background-color: #003b4d;
+}
+
+.toast-error {
+  background-color: #b92929;
+}
+
+.toast-info {
+  background-color: #009775;
+}
