@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <h1>Listagem dos extratos de financiamento</h1>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Ações</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let financialStatement of financialStatements; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <mat-label>
+            {{ financialStatement.id }}
+          </mat-label>
+        </td>
+        <td>
+          <mat-label>
+            {{ financialStatement.name }}
+          </mat-label>
+        </td>
+        <td>
+          <button
+            mat-raised-button
+            class="main-table-button"
+            (click)="goToSelectedFinancialStatementPage(financialStatement.id)"
+          >
+          <mat-icon>remove_red_eye</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
